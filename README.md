@@ -26,3 +26,4 @@ Los principales objetivos de este proyecto incluyen:
         claro y reflejar los procesos de desarrollo.</li>
         <li>Una muestra del tablero de Kanban que hayáis utilizado.</li>
 </ul>
+
