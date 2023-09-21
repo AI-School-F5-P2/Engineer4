@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 kafka_env
 datos.json
+# env
+/kafka_env
+kafka_env/
