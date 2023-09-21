@@ -34,3 +34,4 @@ def push_passport(data, name):
         db[MONGO_COLLECTION].insert_one(data)            
     else:
         db[MONGO_COLLECTION].update_one({"Passport": item_to_search}, {"$set": data})
+        
