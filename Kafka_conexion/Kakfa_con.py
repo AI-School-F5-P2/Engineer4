@@ -8,4 +8,4 @@ app = faust.App(
     )
 
 # Define a Kafka topic to consume from
-topic = app.topic('probando')
+topic = app.topic('')
