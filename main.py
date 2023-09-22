@@ -1,6 +1,6 @@
 import faust
 import json
-from Functions.Push_name import push_name, push_address, push_fullname, push_passport
+from Functions.Push_name import push_name, push_address, push_fullname, push_passport, push_another
 from Kafka_conexion.Kakfa_con import app, topic
 
 # funcion para guardar los datos en un json
@@ -14,16 +14,19 @@ def processData(data):
     try:
     # Procesamos cada data que nos llega y se almacena en bruto
         # save_data(data, "data.json")
-        if "name" in data:
-            push_name(data, "name")
-        if "Address" in data:
-            push_address(data, "Address")
-        if  "Fullname" in data:
-            push_fullname(data, "Fullname")
-        if "Passport" in data:
-            push_passport(data, "Passport")
-        else:
-            pass
+        for clave, valor in data.items():
+            if clave == 'name':
+                push_name(data, valor, clave)
+            elif clave == 'passport':
+                push_passport(data, valor, clave)
+            elif clave == "Fullname":
+                push_fullname(data, valor, clave)
+            elif "Passport" in data:
+                push_another(data, valor, clave)
+            elif clave == "Address":
+                push_address(data, clave)
+            else:
+                pass
     except Exception as e:
         print(e)
         pass

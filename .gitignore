@@ -161,3 +161,6 @@ cython_debug/
 kafka_env
 .env
 config.py
+# env
+/kafka_env
+kafka_env/
