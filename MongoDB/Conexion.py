@@ -1,10 +1,10 @@
 from pymongo import MongoClient
+from decouple import config
 
 # CONFIGURACION CREENCIALES DE MONGOBD
-MONGO_URI = "mongodb://localhost:27017/"
-MONGO_DB = "Business"
-MONGO_COLLECTION = "negocios16"
-
+MONGO_URI = config("MONGO_URI")
+MONGO_DB = config("MONGO_DB")
+MONGO_COLLECTION = config("MONGO_COLLECTION")
 
 
 # INCIALIZAMAMOS CLIENTE DE MONGO
