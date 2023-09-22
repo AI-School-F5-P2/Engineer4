@@ -1,7 +1,6 @@
 import json
 from Functions.Push_name import push_name, push_address, push_fullname, push_passport, push_another
 from Kafka_conexion.Kakfa_con import app, topic
-import sys
 
 # funcion para guardar los datos en un json
 def save_data(data, path):
@@ -14,22 +13,25 @@ def processData(data):
     # Procesamos cada data que nos llega y se almacena en bruto
         # save_data(data, "data.json")
         for clave, valor in data.items():
-            if 'name' in data and 'last_name' in data and 'sex' in data and 'telfnumber' in data and 'passport' in data and 'email' in data :
+            if clave =='name':
                 push_name(data, valor, clave)
-            elif 'passport' in data and 'IBAN' in data and 'salary' in data :
+            elif clave == 'passport':
                 push_passport(data, valor, clave)
-            elif 'fullname' in data and 'city' in data and 'address' in data:
+            elif clave == "fullname":
                 push_fullname(data, valor, clave)
-            elif 'fullname' in data and 'company' in data and 'company address' in data and 'company_telfnumber' in data and 'company_email' in data and 'job' in data:
+            elif clave == "passport":
                 push_another(data, valor, clave)
-            elif 'address' in data and 'IPv4' in data:
+            elif clave == "IPv4":
                 push_address(data, valor, clave)
+            else:
+                pass
     except Exception as e:
-        print(e)
+        # print(e)
         pass
         
+        # faust -A main worker
 # Define a Faust table to store consumed data
-# faust -A main worker
+
 @app.agent(topic)
 async def consume_messages(messages):
     '''Consume messages from a Kafka topic
