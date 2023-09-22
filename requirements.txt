@@ -21,6 +21,7 @@ click==7.1.2
 colorclass==2.2.2
 colorlog==6.7.0
 comm==0.1.4
+config==0.5.1
 croniter==1.4.1
 debugpy==1.8.0
 decorator==5.1.1

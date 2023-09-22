@@ -172,4 +172,5 @@ data_engineer.code-workspace
 /conf/mongo_conn.py
 /conf/mongo_use.py
 /conf/sql_conf.py
-
+/conf/kafka_conf.py
+/data/

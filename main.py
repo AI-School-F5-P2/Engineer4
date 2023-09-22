@@ -1,31 +1,46 @@
-from kafka import KafkaConsumer
 import json
+from Functions.Push_name import push_name, push_address, push_fullname, push_passport, push_another
+from conf.kafka_conf import *
+import sys
+import faust
 
-# Configura los parámetros de conexión a Kafka
-bootstrap_servers = 'localhost:29092'  # Reemplaza con la dirección de tu servidor Kafka
-topic_name = 'probando'  # Reemplaza con el nombre del tópico de Kafka
+# funcion para guardar los datos en un json
+def save_data(data, path):
+    with open(path, "w", encoding="utf-8") as archivo_json:
+        json.dump(data, archivo_json, ensure_ascii=False)
 
-# Crea un consumidor de Kafka
-consumer = KafkaConsumer(topic_name, group_id='my-group', bootstrap_servers=bootstrap_servers)
-
-# Define una función para guardar los datos en un archivo JSON
-def guardar_data(data):
-    # Decodifica los datos de bytes a una cadena (string)
-    data_str = data.decode('utf-8')
-
-    # Convierte la cadena 'data_str' a un diccionario
-    data_dict = json.loads(data_str)
-
-    with open('data/datos.json', 'a') as archivo_json:
-        # Convierte el diccionario 'data_dict' a formato JSON y guárdalo en el archivo
-        json.dump(data_dict, archivo_json, indent = 4)
-        archivo_json.write('\n')  # Agrega una nueva línea después de cada registro JSON
-
-# Itera sobre los mensajes y procesa los datos
-for message in consumer:
-    data = message.value  # Los datos del mensaje
-    # Realiza acciones de procesamiento aquí
-    guardar_data(data)
-    print(data)
-
-
+# funcion para iterar en la data        
+def processData(data):
+    try:
+    # Procesamos cada data que nos llega y se almacena en bruto
+        # save_data(data, "data.json")
+        for clave, valor in data.items():
+            if 'name' in data and 'last_name' in data and 'sex' in data and 'telfnumber' in data and 'passport' in data and 'email' in data :
+                push_name(data, valor, clave)
+            elif 'passport' in data and 'IBAN' in data and 'salary' in data :
+                push_passport(data, valor, clave)
+            elif 'fullname' in data and 'city' in data and 'address' in data:
+                push_fullname(data, valor, clave)
+            elif 'fullname' in data and 'company' in data and 'company address' in data and 'company_telfnumber' in data and 'company_email' in data and 'job' in data:
+                push_another(data, valor, clave)
+            elif 'address' in data and 'IPv4' in data:
+                push_address(data, valor, clave)
+    except Exception as e:
+        print(e)
+        pass
+        
+# Define a Faust table to store consumed data
+# faust -A main worker
+@app.agent(topic)
+async def consume_messages(messages):
+    '''Consume messages from a Kafka topic
+    To start the application enter the following command: 
+    faust -A main worker
+    '''
+    try:
+        async for message in messages:
+            data = message
+            processData(data)
+            print(f'Received message: {data}')
+    except Exception as e:
+        print(e)
