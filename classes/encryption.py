@@ -13,6 +13,6 @@ class Encryption():
         # Hasheamos la contraseña ingresada y comparamos con la contraseña hasheada almacenada
         return Encryption.encrypt(password) == hashed_password
 
-print (Encryption.encrypt("password"))
-print (Encryption.verify("password", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"))
+#print (Encryption.encrypt("password"))
+#print (Encryption.verify("password", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"))
 

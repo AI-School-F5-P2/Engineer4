@@ -2,7 +2,7 @@ import logging
 import colorlog
 import os
 from dotenv import load_dotenv
-
+# Clase para logear
 # Configurar el logger
 class Logger:
     logger = None

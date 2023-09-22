@@ -167,4 +167,10 @@ data_engineer.code-workspace
 /docs/*.*
 /de_env/
 .DS_Store
+/__pycache__/
+/classes/__pycache__/
+/conf/__pycache__/
+/conf/mongo_conn.py
+/conf/mongo_use.py
+/conf/sql_conf.py
 

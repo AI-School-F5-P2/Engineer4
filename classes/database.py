@@ -1,15 +1,22 @@
+# Clase par gestionar bases de datos SQL
 import mysql.connector as dbc
 import sqlite3
 import psycopg2
 import os # Se usará para borrar la base de datos por defecto cuando se seleccione
 # una base de datos en caso de usar sqlite3.
+from conf.sql_conf import sql
 
 class DBAccess:
     # Los motores de base de datos serán:
     #       1 - MySQL
     #       2 - PostgreSQL
     #       3 - SQLite
-    def __init__(self, engine, port, host, user, password):
+    def __init__(self, 
+                 engine = sql['engine'], 
+                 port = sql['port'], 
+                 host = sql['host'], 
+                 user = sql['user'], 
+                 password = sql['password']):
         # Se accede al motor de base de datos con los datos por defecto
         self.host = host
         self.user = user
