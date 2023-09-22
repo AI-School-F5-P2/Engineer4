@@ -5,14 +5,14 @@ fullnames = [
     {"fullname": "Garry Perez", "city": "Lleida", "address": "calle 30"},
     {"fullname": "Pamela Perez", "city": "barcelona", "address": "calle 42"},
     {"fullname": "Maikol Garrido", "city": "vakencia", "address": "calle 50"},
-    {"fullname": "Juan Perez", "city": "caracas", "address": "calle 52"},
+    {"fullname": "Juan Perez", "city": "caracas", "address": "calle 52"},pppppppppp
 ]
 
 name = [
     {"name": "Garry", "last_name": "Perez", "sex": ["ND"], "telfnumber": "+34 828881626", "passport": "O72781818GP", "email": "garry72@yahoo.com"},
     {"name": "Pamela", "last_name": "Perez", "sex": ["ND"], "telfnumber": "+34871841956", "passport": "P67893956PP", "email": "pamela@gmail.com"},
     {"name": "Juan", "last_name": "Perez", "sex": ["M"], "telfnumber": "09714558510", "passport": "119759331JP", "email": "juan04@hotmail.co.uk"},
-    {"name": "Mr", "last_name": "Perez", "sex": None, "telfnumber": "06958496001", "passport": "S51887718MP", "email": "anthony@yahoo.co.uk"},
+    {"name": "Mr", "last_name": "Perez", "sex": None, "telfnumber": "06958496001", "passport": "S51887718MP", "email": "anthony@yahoo.co.uk"},pppppppp
   
 ]
 
@@ -20,7 +20,7 @@ passport = [
     {"passport": "119759331JP", "IBAN": "FR1863246239031849361616823JP", "salary": "169264kr"},
     {"passport": "S51887718MP", "IBAN": "GB70KMQN78443664081637MP", "salary": "35711\u0192"},
     {"passport": "O72781818GP", "IBAN": "GB67NEUG41044545062330GP", "salary": "41778.\u062f.\u0625"},
-    {"passport": "P67893956PP", "IBAN": "FR9259676294967419360216877PP", "salary": "148610SM"},
+    {"passport": "P67893956PP", "IBAN": "FR9259676294967419360216877PP", "salary": "148610SM"},pppppp
 ]
 
 

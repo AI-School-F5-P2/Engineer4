@@ -19,16 +19,16 @@ def processData(data):
                 push_name(data, valor, clave)
             elif clave == 'passport':
                 push_passport(data, valor, clave)
-            elif clave == "Fullname":
+            elif clave == "fullname":
                 push_fullname(data, valor, clave)
-            elif "Passport" in data:
+            elif "passport" in data:
                 push_another(data, valor, clave)
-            elif clave == "Address":
-                push_address(data, clave)
+            elif clave == "IPv4":
+                push_address(data, valor, clave)
             else:
                 pass
     except Exception as e:
-        print(e)
+        # print(e)
         pass
         
 # Define a Faust table to store consumed data
@@ -37,5 +37,5 @@ async def consume_messages(messages):
     async for message in messages:
         data = message
         processData(data)
-        print(f'Received message: {data}')
+        # print(f'Received message: {data}')
         # You can process the message here or store it in a database
