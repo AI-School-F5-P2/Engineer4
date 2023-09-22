@@ -1,12 +1,12 @@
 import faust
-from config import *
+from decouple import config
 
 # Configuración sencilla de Faust utilizando la configuración importada
 app = faust.App(
-    COMSUMER,
-    broker=BROKER_URL, 
-    value_serializer=FORMAT,
+    config("BROKER_URL"),
+    broker=config("COMSUMER"), 
+    value_serializer=config("FORMAT"),
 )
 
 # Define a Kafka topic to consume from
-topic = app.topic(TOPIC)
+topic = app.topic(config("TOPIC"))

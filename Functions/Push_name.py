@@ -10,13 +10,13 @@ def push_name(data, value, clave):
         del data['name']
         del data['last_name']
         
-        result = db[MONGO_COLLECTION].find_one({"fullname" : value})
+        result = db[mongo_collection].find_one({"fullname" : value})
         if result is None:
-            db[MONGO_COLLECTION].insert_one(data)            
+            db[mongo_collection].insert_one(data)            
         else:
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
-            db[MONGO_COLLECTION].update_one({"fullname": value}, {"$set": new_data})
+            db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
     except Exception as e:
         print(f"push name Error al acceder a la base de datos: {str(e)}")
 
@@ -24,14 +24,14 @@ def push_name(data, value, clave):
 def push_address(data, value, clave):
     try:
         address = data.get("address")
-        result = db[MONGO_COLLECTION].find_one({"address" : address})
+        result = db[mongo_collection].find_one({"address" : address})
         print(result)
         if result is None:
-            db[MONGO_COLLECTION].insert_one(data)            
+            db[mongo_collection].insert_one(data)            
         else:
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
-            db[MONGO_COLLECTION].update_one({"address": address}, {"$set": new_data})
+            db[mongo_collection].update_one({"address": address}, {"$set": new_data})
     except Exception as e:
         print(f"push adres Error al acceder a la base de datos: {str(e)}")
     
@@ -39,13 +39,13 @@ def push_address(data, value, clave):
 # Push data to MongoDB
 def push_another(data, value, clave):
     try:
-        result = db[MONGO_COLLECTION].find_one({"fullname" : value})
+        result = db[mongo_collection].find_one({"fullname" : value})
         if result is None:
-            db[MONGO_COLLECTION].insert_one(data)            
+            db[mongo_collection].insert_one(data)            
         else:
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
-            db[MONGO_COLLECTION].update_one({"fullname": value}, {"$set": new_data})
+            db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
     except Exception as e:
         print(f"push anoter Error al acceder a la base de datos: {str(e)}")
         
@@ -54,27 +54,27 @@ def push_another(data, value, clave):
 
 def push_fullname(data, value, clave):
     try:
-        result = db[MONGO_COLLECTION].find_one({"fullname" : value})
+        result = db[mongo_collection].find_one({"fullname" : value})
         if result is None:
-            db[MONGO_COLLECTION].insert_one(data)            
+            db[mongo_collection].insert_one(data)            
         else:
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
-            db[MONGO_COLLECTION].update_one({"fullname": value}, {"$set": new_data})
+            db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
     except Exception as e:
         print(f"push name Error al acceder a la base de datos: {str(e)}")
 
 # Push data to MongoDB
 def push_passport(data, value, clave):
     try:
-        result = db[MONGO_COLLECTION].find_one({"passport" : value})
+        result = db[mongo_collection].find_one({"passport" : value})
         if result is None:
-            db[MONGO_COLLECTION].insert_one(data)
+            db[mongo_collection].insert_one(data)
         else:
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
-            db[MONGO_COLLECTION].update_one({"passport": value}, {"$set": new_data})
+            db[mongo_collection].update_one({"passport": value}, {"$set": new_data})
             # Elimina el segundo documento que no tiene todos los datos
-            db[MONGO_COLLECTION].delete_one({"passport": value, clave: {"$exists": False}})
+            db[mongo_collection].delete_one({"passport": value, clave: {"$exists": False}})
     except Exception as e:
         print(f"push passport Error al acceder a la base de datos: {str(e)}")

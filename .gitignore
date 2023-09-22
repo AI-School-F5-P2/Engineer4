@@ -158,23 +158,18 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
-<<<<<<< HEAD
+
 kafka_env
 datos.json
 # env
 /kafka_env
 kafka_env/
-=======
-<<<<<<< HEAD
+
 kafka_env
-<<<<<<< HEAD
-=======
+
 # env
 /kafka_env
 kafka_env/
->>>>>>> c908ba97624d35427a3311c6a760e8726626b351
-=======
+
 .env
 config.py
->>>>>>> 9c7c8132a083a1767c3b51cba136eb715df75d8a
->>>>>>> bed36bbbec4e05a3b598d800b6c315ebf18a292a
