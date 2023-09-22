@@ -1,5 +1,5 @@
 import json
-from Functions.Push_name import push_name, push_address, push_fullname, push_passport, push_another
+from auxiliares.Push_name import push_name, push_address, push_fullname, push_passport, push_another
 from conf.kafka_conf import *
 import sys
 import faust

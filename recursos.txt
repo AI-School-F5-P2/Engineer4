@@ -4,3 +4,6 @@ Discord:
 Github:
     https://github.com/AI-School-F5-P2/Engineer4
 
+Trello:
+    https://trello.com/b/qr63fYF3/data-engenier
+
