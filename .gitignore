@@ -160,8 +160,13 @@ cython_debug/
 #.idea/
 <<<<<<< HEAD
 kafka_env
+<<<<<<< HEAD
 =======
 # env
 /kafka_env
 kafka_env/
 >>>>>>> c908ba97624d35427a3311c6a760e8726626b351
+=======
+.env
+config.py
+>>>>>>> 9c7c8132a083a1767c3b51cba136eb715df75d8a

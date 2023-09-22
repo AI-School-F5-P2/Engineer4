@@ -1,12 +1,12 @@
 import faust
+from config import *
 
-# configuracion sencilla de faust
+# Configuración sencilla de Faust utilizando la configuración importada
 app = faust.App(
-    '',
-    broker='',  # Replace with your Kafka broker URL
-    value_serializer='',
-    )
-
+    COMSUMER,
+    broker=BROKER_URL, 
+    value_serializer=FORMAT,
+)
 
 # Define a Kafka topic to consume from
-topic = app.topic('')
+topic = app.topic(TOPIC)
