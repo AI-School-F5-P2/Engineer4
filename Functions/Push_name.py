@@ -1,8 +1,27 @@
 from MongoDB.Conexion import *
-
+from Functions.Push_sql import push_to_sql
 # Push data to MongoDB
+
 def push_name(data, value, clave):
     try:
+        
+        # # Almacena información en las tablas
+        # if 'passport' in data:
+        #     key = data['passport']
+        #     value = data  # Puedes almacenar el diccionario completo
+        #     table_passport[key].put(value)
+        
+        # if 'fullname' in data:
+        #     key = data['fullname']
+        #     value = data  # Puedes almacenar el diccionario completo
+        #     table_fullname[key].put(value)
+        
+        # # Repite el proceso para otras tablas si es necesario
+
+        # key = data['passport']
+        # value = data  # Puedes almacenar el diccionario completo
+        # table_passport[key].put(value)
+
         name = data.get("name", "")
         last_name = data.get("last_name", "")
         data['fullname'] = f"{name} {last_name}"
@@ -17,6 +36,12 @@ def push_name(data, value, clave):
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
             db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
+            # funcion para comprobar si esta completo el date
+            updated_document = db[mongo_collection].find_one({"fullname": value})
+            if len(updated_document) == 15:
+                push_to_sql(updated_document)
+            else:
+                print("no entre al if")
     except Exception as e:
         print(f"push name Error al acceder a la base de datos: {str(e)}")
 
@@ -32,6 +57,10 @@ def push_address(data, value, clave):
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
             db[mongo_collection].update_one({"address": address}, {"$set": new_data})
+            # funcion para comprobar si esta completo el date
+            updated_document = db[mongo_collection].find_one({"address": address})
+            if len(updated_document) == 15:
+                 push_to_sql(updated_document)  # Llama a la función push_to_sql
     except Exception as e:
         print(f"push adres Error al acceder a la base de datos: {str(e)}")
     
@@ -46,6 +75,10 @@ def push_another(data, value, clave):
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
             db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
+            # funcion para comprobar si esta completo el date
+            updated_document = db[mongo_collection].find_one({"fullname": value})
+            if len(updated_document) == 15:
+                push_to_sql(updated_document)  # Llama a la función push_to_sql
     except Exception as e:
         print(f"push anoter Error al acceder a la base de datos: {str(e)}")
         
@@ -61,6 +94,10 @@ def push_fullname(data, value, clave):
             new_data = {**result, **data}
             # Actualiza el documento en la base de datos con los nuevos datos
             db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
+            # funcion para comprobar si esta completo el date
+            updated_document = db[mongo_collection].find_one({"fullname": value})
+            if len(updated_document) == 15:
+                push_to_sql(updated_document)
     except Exception as e:
         print(f"push name Error al acceder a la base de datos: {str(e)}")
 
@@ -76,5 +113,9 @@ def push_passport(data, value, clave):
             db[mongo_collection].update_one({"passport": value}, {"$set": new_data})
             # Elimina el segundo documento que no tiene todos los datos
             db[mongo_collection].delete_one({"passport": value, clave: {"$exists": False}})
+            # funcion para comprobar si esta completo el date
+            updated_document = db[mongo_collection].find_one({"passport": value})
+            if len(updated_document) == 15:
+                push_to_sql(updated_document)
     except Exception as e:
         print(f"push passport Error al acceder a la base de datos: {str(e)}")
