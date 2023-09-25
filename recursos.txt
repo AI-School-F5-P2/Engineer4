@@ -1,8 +1,11 @@
 Discord:
     https://discord.gg/DhgqQhuf
 
-Github:
+Github del proyecto:
     https://github.com/AI-School-F5-P2/Engineer4
+
+GitHub de David:
+    https://github.com/DavidLeirado/data-engineering-educational-project
 
 Trello:
     https://trello.com/b/qr63fYF3/data-engenier

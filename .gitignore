@@ -174,3 +174,8 @@ data_engineer.code-workspace
 /conf/sql_conf.py
 /conf/kafka_conf.py
 /data/
+/classes/encryption.py
+/classes/logger.py
+main_ant.py
+Pasos para dockerizar.txt
+
