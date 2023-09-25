@@ -1,6 +1,7 @@
 import json
 from Functions.Push_name import push_name, push_address, push_fullname, push_passport, push_another
 from Kafka_conexion.Kakfa_con import app, topic
+from Functions.Push_sql import num_registros
 
 # funcion para guardar los datos en un json
 def save_data(data, path):
@@ -42,6 +43,7 @@ async def consume_messages(messages):
         async for message in messages:
             data = message
             processData(data)
+            print(num_registros())
             # print(f'Received message: {data}')
     except Exception as e:
         # print(e)

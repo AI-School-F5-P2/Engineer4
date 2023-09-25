@@ -18,6 +18,14 @@ def push_to_sql(data):
         print(f"Error al insertar en la base de datos: {str(e)}")
     finally:
         cursor.close()
+        
+    
+def num_registros():
+    cursor = connection.cursor()
+    cursor.execute("SELECT COUNT(*) FROM database_info")
+    result = cursor.fetchone()[0]
+    return result
+        
 
 
 
