@@ -38,7 +38,8 @@ def push_name(data, value, clave):
             db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
             # funcion para comprobar si esta completo el date
             updated_document = db[mongo_collection].find_one({"fullname": value})
-            if len(updated_document) == 15:
+            if len(updated_document) == 16:
+                print("si entre al if en push name")
                 push_to_sql(updated_document)
             else:
                 print("no entre al if")
@@ -50,7 +51,6 @@ def push_address(data, value, clave):
     try:
         address = data.get("address")
         result = db[mongo_collection].find_one({"address" : address})
-        print(result)
         if result is None:
             db[mongo_collection].insert_one(data)            
         else:
@@ -59,8 +59,11 @@ def push_address(data, value, clave):
             db[mongo_collection].update_one({"address": address}, {"$set": new_data})
             # funcion para comprobar si esta completo el date
             updated_document = db[mongo_collection].find_one({"address": address})
-            if len(updated_document) == 15:
-                 push_to_sql(updated_document)  # Llama a la función push_to_sql
+            if len(updated_document) == 16:
+                print("si entre al if en push_address")
+                push_to_sql(updated_document)
+            else:
+                print("no entre al if")
     except Exception as e:
         print(f"push adres Error al acceder a la base de datos: {str(e)}")
     
@@ -77,8 +80,11 @@ def push_another(data, value, clave):
             db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
             # funcion para comprobar si esta completo el date
             updated_document = db[mongo_collection].find_one({"fullname": value})
-            if len(updated_document) == 15:
-                push_to_sql(updated_document)  # Llama a la función push_to_sql
+            if len(updated_document) == 16:
+                print("si entre al if en push_another")
+                push_to_sql(updated_document)
+            else:
+                print("no entre al if")
     except Exception as e:
         print(f"push anoter Error al acceder a la base de datos: {str(e)}")
         
@@ -96,8 +102,11 @@ def push_fullname(data, value, clave):
             db[mongo_collection].update_one({"fullname": value}, {"$set": new_data})
             # funcion para comprobar si esta completo el date
             updated_document = db[mongo_collection].find_one({"fullname": value})
-            if len(updated_document) == 15:
+            if len(updated_document) == 16:
+                print("si entre al if en push_fullname")
                 push_to_sql(updated_document)
+            else:
+                print("no entre al if")
     except Exception as e:
         print(f"push name Error al acceder a la base de datos: {str(e)}")
 
@@ -115,7 +124,10 @@ def push_passport(data, value, clave):
             db[mongo_collection].delete_one({"passport": value, clave: {"$exists": False}})
             # funcion para comprobar si esta completo el date
             updated_document = db[mongo_collection].find_one({"passport": value})
-            if len(updated_document) == 15:
+            if len(updated_document) == 16:
+                print("si entre al if en push_passport")
                 push_to_sql(updated_document)
+            else:
+                print("no entre al if")
     except Exception as e:
         print(f"push passport Error al acceder a la base de datos: {str(e)}")

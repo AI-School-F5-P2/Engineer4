@@ -1,25 +1,29 @@
-# Mysql/Conecction.py
-
 import mysql.connector
+from decouple import config
 
-class Connection:
-    def __init__(self):
-        self.config = {
-            "user": "",
-            "password": "",
-            "host": "",
-            "database": "",
-        }
+host = config("HOST")
+user = config("USER_SQL")
+password = config("PASSWORD")
+database = config("DATABASE_SQL")
+connection = None
 
-    def connect(self):
-        try:
-            self.connection = mysql.connector.connect(**self.config)
-            if self.connection.is_connected():
-                print("Conexión a MySQL establecida correctamente")
-        except mysql.connector.Error as err:
-            print(f"Error de MySQL: {err}")
+def connect():
+    try:
+        connection = mysql.connector.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=database
+        )
+        if connection.is_connected():
+            print("Conexión a MySQL establecida correctamente")
+            return connection
+        else:
+            print("No se pudo establecer la conexión a MySQL")
+    except mysql.connector.Error as e:
+        print(f"Error al acceder a la base de datos: {str(e)}")
 
-    def close(self):
-        if hasattr(self, 'connection') and self.connection.is_connected():
-            self.connection.close()
-            print("Conexión a MySQL cerrada")
+def disconnect():
+    if connection and connection.is_connected():
+        connection.close()
+        print("Conexión a MySQL cerrada")

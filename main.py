@@ -42,6 +42,7 @@ async def consume_messages(messages):
         async for message in messages:
             data = message
             processData(data)
-            print(f'Received message: {data}')
+            # print(f'Received message: {data}')
     except Exception as e:
-        print(e)
+        # print(e)
+        pass
