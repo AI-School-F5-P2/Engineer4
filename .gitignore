@@ -178,4 +178,8 @@ data_engineer.code-workspace
 /classes/logger.py
 main_ant.py.txt
 Pasos para dockerizar.txt
+/config/kafka_conf.py
+/config/mongo_conn.py
+/config/mongo_use.py
+/config/sql_conf.py
 
