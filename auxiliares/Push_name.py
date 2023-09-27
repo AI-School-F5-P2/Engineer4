@@ -1,6 +1,6 @@
 from classes.mongo_db import UseMongo
-from conf.mongo_conn import *
-from conf.mongo_use import *
+from config.mongo_conn import *
+from config.mongo_use import *
 
 mi_cliente = UseMongo(
     server=mongo_data['server'], 

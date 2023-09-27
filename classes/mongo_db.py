@@ -1,7 +1,7 @@
 from pymongo import *
 
 ## Leemos los datos de configuración
-from conf.mongo_conn import mongo_data
+from config.mongo_conn import mongo_data
 
 class UseMongo:
     ## A NIVEL DE CLIENTE

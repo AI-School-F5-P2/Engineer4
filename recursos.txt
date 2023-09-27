@@ -10,3 +10,10 @@ GitHub de David:
 Trello:
     https://trello.com/b/qr63fYF3/data-engenier
 
+Si docker se bloquea, desinstalarlo y teclear en la terminal:
+    -rf ~/Library/Group\ Containers/group.com.docker
+    rm -rf ~/Library/Containers/com.docker.docker
+    rm -rf ~/.docker
+    cd /usr/local/bin
+    sudo rm -rf docker docker-compose docker-compose-v1 kubectl.docker com.docker.cli
+

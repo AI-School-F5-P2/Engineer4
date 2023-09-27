@@ -4,7 +4,7 @@ import sqlite3
 import psycopg2
 import os # Se usará para borrar la base de datos por defecto cuando se seleccione
 # una base de datos en caso de usar sqlite3.
-from conf.sql_conf import sql
+from config.sql_conf import sql
 
 class DBAccess:
     # Los motores de base de datos serán:
