@@ -170,6 +170,7 @@ kafka_env
 # env
 /kafka_env
 kafka_env/
-
+my
 .env
 config.py
+multiprocesos.py

@@ -131,3 +131,12 @@ def push_passport(data, value, clave):
                 print("no entre al if")
     except Exception as e:
         print(f"push passport Error al acceder a la base de datos: {str(e)}")
+        
+        
+        
+        
+def push_dataFull(data):
+    try:
+        db[mongo_collection].insert_one(data)
+    except Exception as e:
+        print(f"push name Error al acceder a la base de datos: {str(e)}")
