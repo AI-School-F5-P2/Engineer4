@@ -1,11 +1,13 @@
 from pymongo import *
+from pymongo.errors import WriteError, DuplicateKeyError
 
 ## Leemos los datos de configuración
 from config.mongo_conn import mongo_data
+        
 
 class UseMongo:
     ## A NIVEL DE CLIENTE
-    def __init__(self, server=mongo_data["server"], port=mongo_data["port"], user=mongo_data["user"], password=mongo_data["password"]):
+    def __init__(self, server=mongo_data["server"], port=mongo_data["port"], user=mongo_data["user"], password=mongo_data["password"], notificaciones = False):
         # Se crea un objeto para representar una base de datos Mongo.
         # El objeto se crea con los datos pasados al constructor.
         if mongo_data["auth"]:
@@ -17,6 +19,7 @@ class UseMongo:
         self.port = port
         self.user = user
         self.password = password
+        self.notificaciones = notificaciones # Para indicar si los métodos devuelven notificaciones en caso de errores.
     
     def destroy(self):
         # Se cierra la conexión del cliente
@@ -29,7 +32,10 @@ class UseMongo:
             databases = self.client.list_database_names()
             return databases
         except:
-            return "Se ha producido un error al mostrar las bases de datos."
+            if self.notificaciones:
+                return "Se ha producido un error al mostrar las bases de datos."
+            else:
+                return
 
     def select_db(self, db_name):
         # Selecciona una base de datos sobre la que se harán las operaciones.
@@ -38,7 +44,10 @@ class UseMongo:
         try:
             self.db = self.client[db_name]
         except:
-            print ("Se ha producido un error al seleccionar una base de datos.")
+            if self.notificaciones:
+                print ("Se ha producido un error al seleccionar una base de datos.")
+            else:
+                pass
         return
     
     def remove_db(self, db_name = ""):
@@ -50,7 +59,8 @@ class UseMongo:
             else:
                 self.client.drop_database(db_name)
         except:
-            print ("Se ha producido un error al eliminar una base de datos.")
+            result = "Se ha producido un error al eliminar una base de datos." if self.notificaciones else ""
+            print (result)
         return
     
     ## A NIVEL DE COLECCIÓN
@@ -60,7 +70,7 @@ class UseMongo:
         try:
             result = self.db.list_collection_names()
         except:
-            result = "Se ha producido un error al listar las colecciones."
+            result = "Se ha producido un error al listar las colecciones." if self.notificaciones else ""
         return result
     
     def select_col(self, collection_name):
@@ -70,7 +80,8 @@ class UseMongo:
         try:
             self.collection = self.db[collection_name]
         except:
-            print ("Se ha producido un error al seleccionar una colección.")
+            result = "Se ha producido un error al seleccionar una colección." if self.notificaciones else ""
+            print (result)
         return
     
     def remove_col(self, collection_name = ""):
@@ -82,7 +93,8 @@ class UseMongo:
             else:
                 self.db.drop_collection(collection_name)
         except:
-            print ("Se ha producido un error al eliminar una colección.")
+            result = "Se ha producido un error al eliminar una colección." if self.notificaciones else ""
+            print (result)
     
     ## A NIVEL DE DOCUMENTO
     def count_docs(self, query = {}):
@@ -92,7 +104,7 @@ class UseMongo:
         try:
             result = self.collection.count_documents(query)
         except:
-            result = "Se ha producido un error al contar documentos."
+            result = "Se ha producido un error al contar documentos." if self.notificaciones else ""
         return result
 
     def select_docs(self, query = {}, one = False):
@@ -112,25 +124,36 @@ class UseMongo:
                     docs.append(item)
             return docs
         except:
-            return ("Se ha producido un error al seleccionar documentos.")
+            result = "Se ha producido un error al seleccionar documentos." if self.notificaciones else ""
+            return result
     
     def insert(self, documentos, argumentos = []):
         # Inserta uno o más documentos con la sentencia insert_many.
         # Si sólo se ha pasado un documento y no se ha pasado como 
         # lista, se convierte en lista al principio del método.
-        try:
-            if not isinstance(documentos, list):
-                documentos = [documentos]
+        if not isinstance(documentos, list):
+            documentos = [documentos]
+        for doc in documentos:
             # Si se han pasado los valores en una lista aparte de argumentos se 
             # se integran en los documentos, en el mismo orden en que se han pasado.
-            for doc in documentos:
-                for key, value in doc.items():
-                    if value == '%s':
-                        doc[key] = argumentos.pop(0)
-            # Al final el o los documentos se graban en la colección que ya hay seleccionada
-            self.collection.insert_many(documentos)
-        except:
-            print ("Se ha producido un error al insertar documento(s).")
+            for key, value in doc.items():
+                if value == '%s':
+                    doc[key] = argumentos.pop(0)
+            try:
+                self.collection.insert_one(doc)
+                #print("Documento insertado:", doc)
+            except DuplicateKeyError as error:
+                if self.notificaciones:
+                    print("Error de duplicado:", str(error)) 
+                else:
+                    pass
+            except WriteError as error:
+                if self.notificaciones:
+                    print ("Se ha producido un error al insertar documento(s).")
+                    print('Código de error:', error.code)
+                    print('Mensaje de error:', error.details)
+                else:
+                    pass
         return
 
     def remove_docs(self, query = {}, one = False):
@@ -145,7 +168,8 @@ class UseMongo:
             else:
                 self.collection.delete_many(query)
         except:
-            print ("Se ha producido un error al eliminar documentos.")
+            result = "Se ha producido un error al eliminar documentos." if self.notificaciones else ""
+            print (result)
         return
     
     def change_docs(self, reform, select = {}, one = False):
@@ -160,11 +184,12 @@ class UseMongo:
             else:
                 self.collection.update_many(select, {"$set": reform})
         except:
-            print ("Se ha producido un error al actualizar documentos.")
+            result = "Se ha producido un error al actualizar documentos." if self.notificaciones else ""
+            print (result)
         return
 
     ## A NIVEL DE ÍNDICE
-    def add_index(self, indexes:list, orders = [True]):
+    def add_index(self, indexes:list, orders = [ASCENDING], uniques = [False]):
         # Crea un indice sobre la clave que se pone en index.
         # Si no se especifica orient, será ASCENDING.
         # La alternativa es DESCENDING
@@ -174,30 +199,40 @@ class UseMongo:
         if not isinstance (orders, list):
             print ("El sentido o sentidos de indexación deben ser una lista.")
             return
-        # Si hay más órdenes de indexación que criterios recortamos la matriz de ordenes de indexación
+        if not isinstance (uniques, list):
+            print ("Las unicidades de criterios de indexación deben ser una lista.")
+            return
+        # Si hay más órdenes de indexación que criterios recortamos la lista de ordenes de indexación
         if len(orders) > len(indexes):
             orders = orders[:len(indexes)]
         # Si hay menos órdenes de indexación que criterios, se amplían los órdenes con True.
         if len(orders) < len(indexes):
-            orders.extend([True] * (len(indexes) - len(orders)))
-        # Si alguno de los elementos de orders no es booleano lo convertimos a False.
+            orders.extend([ASCENDING] * (len(indexes) - len(orders)))
+        # Si hay más unicidades que criterios recortamos la lista de unicidades.
+        if len(uniques) > len(indexes):
+            uniques = uniques[:len(indexes)]
+        # Si hay menos unicidades que criterios se amplian las unicidades con False.
+        if len(uniques) < len(indexes):
+            uniques.extend([False] * (len(indexes) - len(uniques)))
+        # Si alguno de los elementos de orders no es ASCENDING o DESCENDING lo convertimos.
         for i, value in enumerate(orders):
+            if value not in [ASCENDING, DESCENDING]:
+                orders[i] = ASCENDING
+        # Si alguno de los elementos de uniques no es booleano lo convertimos a False.
+        for i, value in enumerate(uniques):
             if not isinstance(value, bool):
-                orders[i] = False
+                uniques[i] = False
         # A partir de las listas de indices y de órdenes creamos la lista de tuplas de indexación.
         indices = []
-        for i, criterio in enumerate(indexes):
-            if orders[i]:
-                order = ASCENDING
-            else:
-                order = DESCENDING
-            indices.append(
-                IndexModel([(criterio, order)])
-            )
+        for campo, direccion, unique in zip(indexes, orders, uniques):
+            indice = IndexModel([(campo, direccion)], unique=unique)
+            indices.append(indice)
         try:
             self.collection.create_indexes(indices)
-        except:
-            print ("Se ha producido un error al indexar.")
+        except Exception as e:
+            # Obtener información sobre el campo y la dirección del índice
+            result = f"Se ha producido un error al indexar. {str(e)}" if self.notificaciones else ""
+            print (result)
         return
 
     def remove_idx(self, indexes:list):
@@ -207,7 +242,8 @@ class UseMongo:
         try:
             self.collection.drop_indexes()
         except:
-            print ("Error al eliminar índices.")
+            result = "Error al eliminar índices." if self.notificaciones else ""
+            print (result)
         return
     
     def list_idx(self):
