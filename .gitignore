@@ -182,4 +182,5 @@ Pasos para dockerizar.txt
 /config/mongo_conn.py
 /config/mongo_use.py
 /config/sql_conf.py
+.DS_Store
 
