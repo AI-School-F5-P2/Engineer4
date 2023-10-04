@@ -3,11 +3,13 @@ import pandas as pd
 from classes.mongo_db import UseMongo
 from classes.database import DBAccess
 import re # Para identificar símbolos de moneda y separarlos de la cifra en salary
+from config.mongo_use import mongo_use
+
 
 # Creamos la conexión de MongoDB
 cliente_mongo = UseMongo() # Creamos un cliente de MongoDB
-cliente_mongo.select_db('mensajes')
-cliente_mongo.select_col('mensajes_recibidos')
+cliente_mongo.select_db(mongo_use['db'])
+cliente_mongo.select_col(mongo_use['collection'])
 cliente_mongo.add_index(indexes = ['passport'], uniques = [True])
 
 # Creamos la conexión de MySQL
