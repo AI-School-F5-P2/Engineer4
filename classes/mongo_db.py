@@ -4,7 +4,6 @@ from pymongo.errors import WriteError, DuplicateKeyError
 ## Leemos los datos de configuración
 from config.mongo_conn import mongo_data
         
-
 class UseMongo:
     ## A NIVEL DE CLIENTE
     def __init__(self, server=mongo_data["server"], port=mongo_data["port"], user=mongo_data["user"], password=mongo_data["password"], notificaciones = False):
@@ -141,7 +140,6 @@ class UseMongo:
                     doc[key] = argumentos.pop(0)
             try:
                 self.collection.insert_one(doc)
-                #print("Documento insertado:", doc)
             except DuplicateKeyError as error:
                 if self.notificaciones:
                     print("Error de duplicado:", str(error)) 
