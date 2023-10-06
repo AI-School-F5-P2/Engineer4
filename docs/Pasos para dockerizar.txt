@@ -1,0 +1,81 @@
+DOCKERIZAR
+
+1) Crear archivo Dockerfile en el directorio del proyecto, con el siguiente contenido:
+
+# Usa una imagen de Python oficial como base
+FROM python:3.11
+# Establece el directorio de trabajo en /app
+WORKDIR /Aerolinea_st
+# Copia el archivo requirements.txt al directorio de trabajo
+COPY requirements.txt .
+# Instala las dependencias del proyecto
+RUN pip install --no-cache-dir -r requirements.txt
+# Copia el contenido de la carpeta actual en el directorio de trabajo
+COPY . .
+# Exponer el puerto en el que Streamlit se ejecutará (por defecto 8501)
+EXPOSE 8501
+# Comando para ejecutar la aplicación Streamlit
+CMD ["streamlit", "run", "main.py"]
+
+2) Activar el Docker Desktop:
+    - En Linux:
+    sudo systemctl start docker
+
+    - En Windows:
+    busca "Docker Desktop" en tu menú de inicio y ejecútalo para iniciar el servicio Docker.
+
+    - En Mac:
+    Inicia Docker Desktop desde tu carpeta de aplicaciones.
+
+3) Crear, si no existe, el archivo requirements.txt.
+
+4) Crear la imagen de docker:
+    docker build -t mi_proyecto_streamlit:latest .
+
+5) Comprobar si la imagen tiene vulnerabilidades, con el siguiente comando:
+    docker scout quickview
+
+    Si no funciona, identificate en tu cuenta de docker hub creada según se detalla más adelante.
+
+6) Una vez que la imagen Docker se haya construido con éxito, puedes ejecutar un contenedor basado en ella con el siguiente comando:
+
+    docker run -p 8502:8501 aerolinea_st:latest
+
+SUBIR LA IMAGEN A DOCKERHUB
+1) Crear una cuenta en DockerHub (https://hub.docker.com)
+2) Acceder a la cuenta.
+3) En la terminal acceder a la cuenta de DockerHub con:
+    docker login
+    se pedirán las credenciales de acceso. Si se teclean correctamente, se obtendrá el mensaje:
+    Logging in with your password grants your terminal complete access to your account. 
+    For better security, log in with a limited-privilege personal access token. Learn more at https://docs.docker.com/go/access-tokens/
+4) Etiquetar tu imagen Docker
+    docker tag mi_proyecto:latest tu_usuario/mi_proyecto:latest
+    Donde "mi_proyecto" es el nombre del proyecto con el que se creó la imagen.
+    "tu_usuario" es el nombre de usuario en dockerhub.
+5) Subir la imagen a Docker Hub:
+    docker push tu_usuario/mi_proyecto:latest
+
+COMPARTIR LA IMAGEN:
+La imagen se comparte con otros usuarios pasándoles el nombre, asÍ:
+    tu_usuario/mi_proyecto:latest
+
+USAR LA IMAGEN:
+Cuando otras personas utilizan la imagen Docker que has compartido, deberán seguir estos pasos:
+
+Descargar la imagen Docker: La persona debe descargar la imagen Docker desde Docker Hub 
+utilizando el comando docker pull:
+    docker pull tu_usuario/tu_proyecto:etiqueta
+Ejecutar un contenedor basado en la imagen: Una vez que la imagen se ha descargado, 
+la persona puede ejecutar un contenedor basado en esa imagen utilizando el comando docker run. 
+Dentro del contenedor, la estructura de directorios y los archivos del proyecto 
+(incluyendo las dependencias) estarán disponibles, tal como se configuraron en la imagen Docker.
+    docker run -p puerto_local:puerto_contenedor tu_usuario/tu_proyecto:etiqueta
+Donde puerto_local es el puerto en el que la persona desea exponer la aplicación en su sistema local, 
+puerto_contenedor es el puerto en el que la aplicación se ejecuta dentro del contenedor, 
+y tu_usuario/tu_proyecto:etiqueta es el nombre de la imagen.
+
+
+
+
+
