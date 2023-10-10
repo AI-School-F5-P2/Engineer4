@@ -16,12 +16,6 @@ async def consume_messages(messages):
     try:
         async for message in messages:
             await process_message(message)
+            print(message)
     except Exception as e:
         print(e)
-
-if __name__ == "__main__":
-    app.main()
-
-
-# faust -A main worker
-
