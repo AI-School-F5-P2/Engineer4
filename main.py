@@ -10,7 +10,7 @@ import asyncio
 from config.kafka_conf import topic, app
 from auxiliares.secondary import process_message
 
-# Iniciar el proceso en segundo plano utilizando create_task
+# Iniciar el proceso en segundo plano utilizando process_message
 @app.agent(topic)
 async def consume_messages(messages):
     try:

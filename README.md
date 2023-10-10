@@ -1,21 +1,19 @@
-<<<<<<< HEAD
 # Engineer4
-=======
-# AI School Data Engineering Project
 
-> ## Disclaimer: Code Access Restriction
->
->Dear Participant,
->
->As part of this challenge, it is imperative that you approach the provided data with integrity and adhere to the guidelines set forth in this document. To ensure a fair and educational experience, we have intentionally restricted access to the code responsible for generating the data used in this project.
->
->Please refrain from attempting to access, reverse engineer, or use the code that generates the data. Doing so undermines the purpose of this challenge and may result in disqualification from the project.
->
->The intention behind this restriction is to encourage you to focus on the data engineering aspects, such as extraction, transformation, and loading processes, rather than on the data generation itself.
->
->We trust that you will respect this requirement and engage with the challenge in a spirit of honesty and learning.
->
->Thank you for your understanding and cooperation.
+# AI School Data Engineering Project
+## Disclaimer: Code Access Restriction
+
+Dear Participant,
+
+As part of this challenge, it is imperative that you approach the provided data with integrity and adhere to the guidelines set forth in this document. To ensure a fair and educational experience, we have intentionally restricted access to the code responsible for generating the data used in this project.
+
+Please refrain from attempting to access, reverse engineer, or use the code that generates the data. Doing so undermines the purpose of this challenge and may result in disqualification from the project.
+
+The intention behind this restriction is to encourage you to focus on the data engineering aspects, such as extraction, transformation, and loading processes, rather than on the data generation itself.
+
+We trust that you will respect this requirement and engage with the challenge in a spirit of honesty and learning.
+
+Thank you for your understanding and cooperation.
 
 
 # Business case
@@ -100,4 +98,7 @@ These are the schemas you will find:
   - IPv4
 
 Remember that you will have to join the data from the same person to store them together. Check the data carefully, as they may not be consistent.
+<<<<<<< HEAD
 >>>>>>> ea3a9a97e2ae87bb07f15cf735b828bcd8bc4eee
+=======
+>>>>>>> 7c07650b33032454b0c4ab2f4255b00d0f9eb570
