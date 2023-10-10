@@ -1,3 +1,6 @@
 kafka_env
 /kafka_env
 \kafka_env
+.env_chefo
+/.env_chefo
+\.env_chefo

@@ -1,0 +1,40 @@
+version: '3'
+services:
+
+# MYSQL
+  mysql:
+    image: mysql:latest
+    env_file:
+      - .env
+    container_name: MYSQL-ENGENIEER
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: data_engenieer
+    ports:
+      - "3307:3306"
+    networks:
+      - my-network
+
+# MONGO
+  mongodb:
+    image: mongo:latest
+    container_name: MONGO-ENGENIEER
+    ports:
+      - "27017:27017"
+    networks:
+      - my-network
+
+# APP
+
+  your-app:
+    build:
+      context: .
+    container_name: APP-ENGENIEER
+    depends_on:
+      - mysql
+      - mongodb
+    networks:
+      - my-network
+
+networks:
+  my-network:
