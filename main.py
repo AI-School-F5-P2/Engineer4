@@ -7,14 +7,18 @@ Para poner en marcha:
 '''
 
 import asyncio
+# Se importa desde el paquete config un fichero con los datos de conexión y 
+# las variables de uso, para tener esta información externalizada. 
 from config.kafka_conf import topic, app
 from auxiliares.secondary import process_message
 
-# Iniciar el proceso en segundo plano utilizando process_message
+# Este es el proceso principal que se ocupa de leer los mensajes de Kafka
+# Y pasarlos a una función donde se procesan.
 @app.agent(topic)
 async def consume_messages(messages):
     try:
         async for message in messages:
+            # Iniciar el proceso en segundo plano utilizando process_message
             await process_message(message)
     except Exception as e:
         print(e)
