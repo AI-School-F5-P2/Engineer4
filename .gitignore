@@ -159,3 +159,31 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .env_env
+.idea/
+.env
+.env_env
+#####################################################
+Briefing_proyecto_Data_Engineer.pdf
+/datagen/*.*
+data_engineer.code-workspace
+/de_env/
+.DS_Store
+/__pycache__/
+/classes/__pycache__/
+/conf/__pycache__/
+/conf/mongo_conn.py
+/conf/mongo_use.py
+/conf/sql_conf.py
+/conf/kafka_conf.py
+/data/
+/classes/encryption.py
+/classes/logger.py
+main_ant.py.txt
+Pasos para dockerizar.txt
+/config/kafka_conf.py
+/config/mongo_conn.py
+/config/mongo_use.py
+/config/sql_conf.py
+.DS_Store
+ANT__compose.yaml
+

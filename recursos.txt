@@ -1,0 +1,19 @@
+Discord:
+    https://discord.gg/DhgqQhuf
+
+Github del proyecto:
+    https://github.com/AI-School-F5-P2/Engineer4
+
+GitHub de David:
+    https://github.com/DavidLeirado/data-engineering-educational-project
+
+Trello:
+    https://trello.com/b/qr63fYF3/data-engenier
+
+Si docker se bloquea, desinstalarlo y teclear en la terminal:
+    rm -rf ~/Library/Group\ Containers/group.com.docker
+    rm -rf ~/Library/Containers/com.docker.docker
+    rm -rf ~/.docker
+    cd /usr/local/bin
+    sudo rm -rf docker docker-compose docker-compose-v1 kubectl.docker com.docker.cli
+
