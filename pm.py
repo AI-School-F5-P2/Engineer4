@@ -1,3 +1,8 @@
+'''
+NO USAR ESTE CÓDIGO. ES SÓLO UNA PRUEBA DURANTE EL DESARROLLO, PERO NO ES FUNCIONAL PARA EL PROYECTO.
+'''
+
+
 from classes.mongo_db import UseMongo
 from config.mongo_conn import mongo_data
 from config.mongo_use import mongo_use
