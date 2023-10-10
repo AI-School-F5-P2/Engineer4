@@ -9,7 +9,7 @@ services:
     container_name: MYSQL-ENGENIEER
     environment:
       MYSQL_ROOT_PASSWORD: 123
-      MYSQL_DATABASE: data_engenieer
+      MYSQL_DATABASE: data_engineer
     ports:
       - "3307:3306"
     networks:
@@ -20,7 +20,7 @@ services:
     image: mongo:latest
     container_name: MONGO-ENGENIEER
     ports:
-      - "27017:27017"
+      - "27018:27017"
     networks:
       - my-network
 
