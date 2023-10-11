@@ -98,7 +98,4 @@ These are the schemas you will find:
   - IPv4
 
 Remember that you will have to join the data from the same person to store them together. Check the data carefully, as they may not be consistent.
-<<<<<<< HEAD
->>>>>>> ea3a9a97e2ae87bb07f15cf735b828bcd8bc4eee
-=======
->>>>>>> 7c07650b33032454b0c4ab2f4255b00d0f9eb570
+
