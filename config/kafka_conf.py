@@ -1,9 +1,9 @@
 import faust
 
-CONSUMER = "my-kafka-consumer"
-BROKER_URL = "kafka://localhost:29092"
-FORMAT = "json"
-TOPIC = "probando"
+CONSUMER = ""
+BROKER_URL = ""
+FORMAT = ""
+TOPIC = ""
 
 app = faust.App(
     CONSUMER,
