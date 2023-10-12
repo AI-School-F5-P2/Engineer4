@@ -1,0 +1,18 @@
+A veces al usar Kafka Java puede quedarse corriendo en el puerto 2181, 
+que es el puerto por de defecto de Zookeeper.
+Eso hará que en futuras ejecuiones del código se produzca un error 
+por querer usar un puerto que ya está en uso.
+
+La forma de liberar el puerto desde la terminal es la siguiente:
+
+lsof -i :2181
+Este comando mostrará los procesos que se están ejecutabndo en el puerto indicado (2181 en este caso).
+
+Los procesos tienen un número PID. Supongamos que aparece un proceso con el PID 3407.
+Para liberarlo teclearemos en la terminal:
+
+kill 3407
+
+Y así con todos los procesos que aparezcan en el puerto que queremos liberar.
+
+

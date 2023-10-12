@@ -1,0 +1,6 @@
+python-decouple
+faust-streaming
+pymongo
+sqlite-utils
+mysql-connector-python
+psycopg2
