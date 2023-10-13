@@ -36,6 +36,14 @@ El archivo de configuración (`config`) es esencial para la correcta operación 
 #### docker-compose.yaml
 Se guardan las configuraciones para hacer las conexiones a la base de datos
 
+#### Instruccions para clonar y ejecutar este proyecto
+
+- git clone https://github.com/AI-School-F5-P2/Engineer4.git
+- entrar a la carpeta, instalar los requirements con pip install -r requirements.txt
+- ejectuar el comando faust -A main worker
+- tener previamente instalado mongocompass, y mongo, (automaticamente la base de datos de screa y podras visualizar los datos)
+- de igual forma deberaas clonar el repo re David que sirve a modo de extractor de datos es un composer donde tendras que seguir las intrucciones de su repo para continuar 
+
 
 ## INTEGRANTES DEL EQUIPO 4
 
